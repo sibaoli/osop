@@ -19,8 +19,8 @@ git clone https://github.com/tobegit3hub/osop.git
 
 mv ./osop /root/
 
-# Edit zj_hosts and zj
-ls -s /root/osop/zj /bin/
+# Edit regionone_hosts and region
+ls -s /root/osop/regionone /bin/
 ```
 
 ## Usage
@@ -28,19 +28,19 @@ ls -s /root/osop/zj /bin/
 Run commands with ncurses.
 
 ```
-zj
+regiononej
 ```
 
 Run commands in cluster or nodes.
 
 ```
-ansible -i zj_hosts api1 -m shell -a "ping -c 1 -W 1 127.0.0.1"
+ansible -i region_hosts api1 -m shell -a "ping -c 1 -W 1 127.0.0.1"
 ```
 
 Run playbooks in cluster or nodes.
 
 ```
-ansible-playbook -i zj_hosts ping-local.yaml
+ansible-playbook -i region_hosts ping-local.yaml
 ```
 
 ## Screenshot

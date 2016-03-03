@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Add these in each region
-# export REGION_NAME="中金业务2"
-# export HOST_FILE="/root/osop/zj_hosts"
+# export REGION_NAME="RegionOne"
+# export HOST_FILE="/root/osop/region_hosts"
 # export ROLE_DIR="/root/osop"
 
 # Contant variables
