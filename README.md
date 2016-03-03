@@ -42,3 +42,7 @@ Run playbooks in cluster or nodes.
 ```
 ansible-playbook -i zj_hosts ping-local.yaml
 ```
+
+## Screenshot
+
+![](./screenshot.png)
