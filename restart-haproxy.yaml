@@ -1,0 +1,6 @@
+---
+- hosts: lb
+  gather_facts: no
+  tasks:
+    - name: 重启haproxy服务
+      command: systemctl restart haproxy

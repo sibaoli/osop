@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# Add these in each region
+# export REGION_NAME="中金业务2"
+# export HOST_FILE="/root/osop/zj_hosts"
+# export ROLE_DIR="/root/osop"
+
+# Contant variables
+DIALOG_CANCEL=1
+DIALOG_ESC=255
+HEIGHT=0
+WIDTH=0
+
+display_confirm_dialog() {
+  # $1 command name
+  if dialog --backtitle $REGION_NAME --yesno "Please confirm again?" $HEIGHT $WIDTH
+  then
+    clear
+    echo $1
+    eval $1
+    exit
+  else
+     clear
+     echo "Cancel the command."
+     exit
+  fi
+}
+
+while true; do
+  exec 3>&1
+  selection=$(dialog \
+    --backtitle $REGION_NAME \
+    --clear \
+    --cancel-label "Exit" \
+    --menu "Please select:" $HEIGHT $WIDTH 0 \
+    "1" "重启Cinder服务" \
+    "2" "重启nova-compute服务" \
+    "3" "重启httpd服务" \
+    "4" "重启Glance服务" \
+    "5" "重启API节点nova服务" \
+    "6" "重启Memcache服务" \
+    "7" "重启Haproxy服务" \
+    "8" "创建测试虚机" \
+    "9" "检查ceph状态" \
+    2>&1 1>&3)
+  exit_status=$?
+  exec 3>&-
+  case $exit_status in
+    $DIALOG_CANCEL)
+      clear
+      echo "Program terminated."
+      exit
+      ;;
+    $DIALOG_ESC)
+      clear
+      echo "Program aborted." >&2
+      exit 1
+      ;;
+  esac
+
+  case $selection in
+    0 )
+      clear
+      echo "Program terminated."
+      ;;
+    1 )
+      YAML_FILE="restart-cinder-service.yaml"
+      ;;
+    2 )
+      YAML_FILE="restart-nova-compute.yaml"
+      ;;
+    3 )
+      YAML_FILE="restart-httpd.yaml"
+      ;;
+    4 )
+      YAML_FILE="restart-glance-service.yaml"
+      ;;
+    5 )
+      YAML_FILE="restart-nova-api-scheduler-conductor.yaml"
+      ;;
+    6 )
+      YAML_FILE="restart-memcache.yaml"
+      ;;
+    7 )
+      YAML_FILE="restart-haproxy.yaml"
+      ;;
+    8 )
+      YAML_FILE="boot-test-vm.yaml"
+      ;;
+    9 )
+      YAML_FILE="ceph-check.yaml"
+      ;;
+ esac
+      display_confirm_dialog "ansible-playbook -vvv -i $HOST_FILE $ROLE_DIR/$YAML_FILE" 
+done

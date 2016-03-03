@@ -1,0 +1,6 @@
+---
+- hosts: mc
+  gather_facts: no
+  tasks:
+    - name: 重启memcache服务
+      command: systemctl restart memcached

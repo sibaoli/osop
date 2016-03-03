@@ -1,0 +1,6 @@
+---
+- hosts: api
+  gather_facts: no
+  tasks:
+    - name: 重启httpd服务
+      command: systemctl restart httpd

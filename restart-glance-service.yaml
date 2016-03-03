@@ -1,0 +1,8 @@
+---
+- hosts: api
+  gather_facts: no
+  tasks:
+    - name: 重启glance-api
+      command: systemctl restart openstack-glance-api
+    - name: 重启glance-registry
+      command: systemctl restart openstack-glance-registry

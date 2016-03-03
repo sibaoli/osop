@@ -1,0 +1,13 @@
+---
+- hosts: api1
+  gather_facts: no
+  tasks:
+    - name: 拷贝update-admin-quota.sh脚本
+      copy: 
+        src: ./update-admin-quota.sh 
+        dest: /tmp/update-admin-quota.sh
+        owner: root
+        group: root
+        mode: 0755
+    - name: 修改admin租户的quota
+      command: /tmp/update-admin-quota.sh

@@ -1,0 +1,12 @@
+---
+- hosts: api1
+  tasks:
+    - name: 拷贝boot-osop-vm.sh脚本
+      copy: 
+        src: ./boot-osop-vm.sh 
+        dest: /tmp/boot-osop-vm.sh
+        owner: root
+        group: root
+        mode: 0755
+    - name: 测试能否创建虚拟机
+      command: /tmp/boot-osop-vm.sh

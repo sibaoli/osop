@@ -1,0 +1,10 @@
+---
+- hosts: api
+  gather_facts: no
+  tasks:
+    - name: 重启nova-api
+      command: systemctl restart openstack-nova-api
+    - name: 重启nova-scheduler
+      command: systemctl restart openstack-nova-scheduler
+    - name: 重启nova-conductor
+      command: systemctl restart openstack-nova-conductor

@@ -1,0 +1,6 @@
+---
+- hosts: compute
+  gather_facts: no
+  tasks:
+    - name: 重启openstack-nova-compute服务
+      command: systemctl restart openstack-nova-compute

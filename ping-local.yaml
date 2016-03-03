@@ -1,0 +1,6 @@
+---
+- hosts: api
+  gather_facts: no
+  tasks:
+    - name: 测试能否Ping本地
+      command: ping -c 1 -W 1 127.0.0.1

@@ -1,0 +1,10 @@
+---
+- hosts: api1
+  gather_facts: no
+  tasks:
+    - name: 重启cinder-api
+      command: pcs resource restart openstack-cinder-api
+    - name: 重启cinder-scheduler
+      command: pcs resource restart openstack-cinder-scheduler
+    - name: 重启cinder-volume
+      command: pcs resource restart openstack-cinder-volume
