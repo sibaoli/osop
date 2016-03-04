@@ -1,0 +1,50 @@
+---
+- hosts: lb1
+  gather_facts: no
+  tasks:
+    - name: 通过Pacemaker获取Vip状态
+      register: vip_status
+      shell: pcs status | grep vip | grep -E "FAILED|Stopped" | wc -l
+
+    - fail: msg = "判断Vip状态是否异常"
+      when: vip_status.stdout.strip() > '0'
+
+- hosts: lb
+  gather_facts: no
+  tasks:
+    - name: 通过Systemd检查Haproxy状态
+      register: haproxy_status
+      shell: systemctl status haproxy | grep Active | awk '{print $2}'
+
+    - fail: msg = "判断Haproxy状态是否异常"
+      when: haproxy_status.stdout != "active"
+
+- hosts: mc
+  gather_facts: no
+  tasks:
+    - name: 通过Systemd检查Memcache状态
+      register: memcache_status
+      shell: systemctl status memcached | grep Active | awk '{print $2}'
+
+    - fail: msg = "判断Memcache状态是否异常"
+      when: memcache_status.stdout != "active"
+
+- hosts: mq
+  gather_facts: no
+  tasks:
+    - name: 通过Systemd检查Rabbitmq状态
+      register: rabbitmq_status
+      shell: systemctl status rabbitmq-server | grep Active | awk '{print $2}'
+
+    - fail: msg = "判断Rabbitmq状态是否异常"
+      when: rabbitmq_status.stdout != "active"
+
+- hosts: db1
+  gather_facts: no
+  tasks:
+    - name: 通过Pacemaker获取MySQL状态
+      register: mysql_status
+      shell: pcs status | grep mysql | grep -E "FAILED|Stopped" | wc -l
+
+    - fail: msg = "判断MySQL状态是否异常"
+      when: mysql_status.stdout.strip() > '0'

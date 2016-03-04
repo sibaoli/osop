@@ -33,16 +33,18 @@ while true; do
     --clear \
     --cancel-label "Exit" \
     --menu "Please select:" $HEIGHT $WIDTH 0 \
-    "1" "重启Cinder服务" \
-    "2" "重启nova-compute服务" \
-    "3" "重启httpd服务" \
-    "4" "重启Glance服务" \
-    "5" "重启API节点nova服务" \
-    "6" "重启Memcache服务" \
-    "7" "重启Haproxy服务" \
-    "8" "测试创建虚拟机" \
-    "9" "检查Ceph状态" \
+    "1"  "重启Cinder服务" \
+    "2"  "重启nova-compute服务" \
+    "3"  "重启Httpd服务" \
+    "4"  "重启Glance服务" \
+    "5"  "重启API节点nova服务" \
+    "6"  "重启Memcache服务" \
+    "7"  "重启Haproxy服务" \
+    "8"  "测试创建虚拟机" \
+    "9"  "检查Ceph状态" \
     "10" "测试创建云硬盘" \
+    "11" "检查OpenStack服务状态" \
+    "12" "检查基础服务状态" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -89,12 +91,19 @@ while true; do
       YAML_FILE="test-boot-vm.yaml"
       ;;
     9 )
-      YAML_FILE="ceph-check.yaml"
+      YAML_FILE="check-ceph-status.yaml"
       ;;
     10 )
       YAML_FILE="test-create-volume.yaml"
+      ;;
+    11 )
+      YAML_FILE="check-openstack-services.yaml"
+      ;;
+    12 )
+      YAML_FILE="check-basic-services.yaml"
       ;;
   esac
   display_confirm_dialog "ansible-playbook -vvv -i $HOST_FILE $ROLE_DIR/$YAML_FILE" 
 
 done
+

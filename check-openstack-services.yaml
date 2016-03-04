@@ -1,0 +1,31 @@
+---
+- hosts: api1
+  gather_facts: no
+  tasks:
+    - name: 获取Nova service-list状态
+      register: nova_service_status
+      shell: nova service-list | awk '{print $12}' | grep -v State | grep -v ^$ | grep down | wc -l
+
+    - fail: msg = "判断Nova service-list状态是否异常"
+      when: nova_service_status.stdout.strip() > '0'
+
+    - name: 获取Neutron agent-list状态
+      register: neutron_service_status
+      shell: agent-list | awk -F '|' '{print $5}' | grep -v ^$ | grep -v alive | grep xxx | wc -l
+
+    - fail: msg = "判断Neutron agent-list状态是否异常"
+      when: neutron_service_status.stdout.strip() > '0'
+
+    - name: 获取Cinder service-list状态
+      register: cinder_service_status
+      shell: cinder service-list | grep enabled | grep down | wc -l
+
+    - fail: msg = "判断Cinder service-list状态是否异常"
+      when: cinder_service_status.stdout.strip() > '0'
+
+    - name: 通过Pacemake检查Cinder服务
+      register: pcs_cinder_status
+      shell: pcs status | grep -E "FAILED|Stopped" | wc -l
+
+    - fail: msg = "判断Pacemaker检查Cinder状态是否异常"
+      when: pcs_cinder_status.stdout.strip() > '0'
