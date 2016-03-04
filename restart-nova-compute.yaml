@@ -1,5 +1,5 @@
 ---
-- hosts: compute
+- hosts: comp
   gather_facts: no
   tasks:
     - name: 重启openstack-nova-compute服务

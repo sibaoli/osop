@@ -1,0 +1,13 @@
+---
+- hosts: api1
+  gather_facts: no
+  tasks:
+    - name: 拷贝创建云硬盘脚本
+      copy: 
+        src: ./test-create-volume.sh 
+        dest: /tmp/test-create-volume.sh
+        owner: root
+        group: root
+        mode: 0755
+    - name: 测试能否创建云硬盘
+      command: /tmp/test-create-volume.sh

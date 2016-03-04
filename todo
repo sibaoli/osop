@@ -1,0 +1,26 @@
+
+# Check
+
+
+* ceph -s, rados -p openstack-00 ls
+
+* pcs status --full(haproxy, vip)
+
+* mysql
+
+* rabbitmq(cluster_status, list_queues)
+
+* nova(service list)
+* keystone
+* cinder
+* neutron(agent list) 
+
+
+
+
+
+# oprations
+
+* 创建cinder卷
+
+

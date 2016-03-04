@@ -15,9 +15,7 @@ nova boot --image $image_id --flavor $flavor_id --nic net-id=$net_id --poll osop
 
 # Cleanup resources
 nova_id=`nova list | grep "osop-test-vm" | awk '{print $2}'`
-nova delete $nova_id; sleep 5
-
-nova list
+nova delete $nova_id
 
 #sleep 30
 neutron subnet-delete $subnet_id

@@ -1,8 +1,0 @@
----
-- hosts: api1
-  gather_facts: no
-  tasks:
-    - name: 检查ceph Health
-      command: ceph -s
-    - fail: msg="HEALTH_OK"
-      when: "check_ceph() = HEALTH_OK"

@@ -10,6 +10,8 @@ Install ansible.
 
 ```
 pip install -U ansible
+
+yum install ncurses
 ```
 
 Install osop.

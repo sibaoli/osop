@@ -2,12 +2,12 @@
 - hosts: api1
   gather_facts: no
   tasks:
-    - name: 拷贝boot-test-vm.sh脚本
+    - name: 拷贝创建虚拟机脚本
       copy: 
-        src: ./boot-test-vm.sh 
-        dest: /tmp/boot-test-vm.sh
+        src: ./test-boot-vm.sh 
+        dest: /tmp/test-boot-vm.sh
         owner: root
         group: root
         mode: 0755
     - name: 测试能否创建虚拟机
-      command: /tmp/boot-test-vm.sh
+      command: /tmp/test-boot-vm.sh

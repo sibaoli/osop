@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Contant variables
+export REGION_NAME="黄务业务二网"
+export HOST_FILE="/root/osop/yw2_hosts"
+export ROLE_DIR="/root/osop"
+
+/root/osop/osop
