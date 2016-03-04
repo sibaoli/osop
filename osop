@@ -2,7 +2,7 @@
 
 # Add these in each region
 # export REGION_NAME="RegionOne"
-# export HOST_FILE="/root/osop/region_hosts"
+# export HOST_FILE="/root/osop/regionone_hosts"
 # export ROLE_DIR="/root/osop"
 
 # Contant variables
