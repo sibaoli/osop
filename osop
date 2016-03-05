@@ -43,8 +43,9 @@ while true; do
     "8"  "重启Haproxy服务" \
     "9"  "重启Glance服务" \
     "10"  "重启Cinder服务" \
-    "11"  "重启API节点Nova服务" \
-    "12"  "重启nova-compute服务" \
+    "11"  "重启neutron-server服务" \
+    "12"  "重启API节点Nova服务" \
+    "13"  "重启nova-compute服务" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -97,9 +98,12 @@ while true; do
       YAML_FILE="restart-cinder-service.yaml"
       ;;
     11 )
-      YAML_FILE="restart-nova-api-scheduler-conductor.yaml"      
+      YAML_FILE="restart-neutron-server.yaml"
       ;;
     12 )
+      YAML_FILE="restart-nova-api-scheduler-conductor.yaml"
+      ;;
+    13 )
       YAML_FILE="restart-nova-compute.yaml"
       ;;
   esac
