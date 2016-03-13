@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Contant variables
-export REGION_NAME="中金业务网"
-export HOST_FILE="/root/osop/zj_hosts"
-export ROLE_DIR="/root/osop"
-
-/root/osop/osop
